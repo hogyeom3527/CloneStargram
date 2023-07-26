@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div class="container">
+  <table>
+    <thead>
+    <tr>
+      <th>이메일</th>
+      <th>전화번호</th>
+      <th>이름</th>
+      <th>닉네임</th>
+      <th>비밀번호</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="member : ${user}">
+      <!--th:each == foreach문 loop와 같다고 생각하기-->
+      <!--내부에서 사용할 member의 값으로 model의 value로 받은 members를 하나씩 사용.-->
+      <td th:text="${member.email}"></td> <!--each로 꺼내온 member의 id및 name을 text로 사용-->
+      <td th:text="${member.phoneNumber}"></td>
+      <td th:text="${member.name}"></td>
+      <td th:text="${member.userName}"></td>
+      <td th:text="${member.password}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
