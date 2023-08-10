@@ -1,0 +1,21 @@
+footer{
+    height: 100px;
+    margin-top: 80px;
+    display: flex;
+    font-size: 12px;
+
+}
+footer #under{
+    margin: auto;
+}
+footer a{
+    text-decoration: none;
+    color: gray;
+}
+footer p{
+    text-align: center;
+    color: gray;
+}
+footer p span{
+    margin: 0 10px 0 10px;
+}

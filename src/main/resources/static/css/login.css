@@ -1,0 +1,164 @@
+section #loginbox{
+    margin: auto;
+    margin-top: 15px;
+    width: 750px;
+    height: 600px;
+    /* border: 1px red solid; */
+}
+section #loginbox #phone{
+    display: inline-block;
+    /* border: 1px red solid; */
+    position: relative;
+    top: 40px;
+    right: 5px;
+}
+
+section #loginbox #signupbox{
+    display: inline-block;
+    width: 350px;
+    height: 600px;
+    position: relative;
+    left: 5px;
+    top: 40px;
+}
+
+section #loginbox #signupbox #box1{
+    display: block;
+    margin: auto;
+    border: 1px rgb(200, 200, 200) solid;
+    width: 320px;
+    height: 400px;
+    margin-top: 15px;
+}
+section #loginbox #signupbox #box1 img{
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+}
+section #loginbox #signupbox #box1 .write{
+    position: relative;
+    left: 40px;
+    top: 35px;
+    border-color:  rgb(220, 220, 220);
+    border-width: 0.2px;
+    background-color: rgb(249, 249, 249);
+    border-radius: 2px;
+    width: 230px;
+    height: 32px;
+    margin: 4px 0 4px 0;
+    font-size: 12px;
+    padding-left: 6px;
+}
+section #loginbox #signupbox #box1 .write:focus{
+    outline:none;
+    border-color: rgb(171, 171, 171);
+    border-width: 0.2px;
+}
+section #loginbox #signupbox #box1 #button1{
+    display: block;
+    align-items: center;
+    margin: auto;
+    background-color: #4eb8ff;
+    border-radius: 5px;
+    border-style: none;
+    width: 240px;
+    height: 31px;
+    margin-top: 50px;
+}
+section #loginbox #signupbox #box1 #button1:hover{
+    background-color: #007bf6;
+    cursor: pointer;
+}
+
+section #loginbox #signupbox #box1 #button1 span{
+    position: relative;
+    color: white;
+    font-weight: bolder;
+    font-size: 15px;
+}
+section #loginbox #signupbox #box1 #or{ 
+    display: flex;
+    align-items: center;
+    padding: 17px 0 17px 0;
+}
+section #loginbox #signupbox #box1 #or hr{
+    display: inline-block;
+    width: 90px;
+}
+section     #loginbox #signupbox #box1 #or span{
+    color: rgb(134, 134, 134);
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0 -25px 0 -25px;
+}
+section #loginbox #signupbox #box1 #button2{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    background-color:white;
+    border-radius: 5px;
+    border-style: none;
+    width: 240px;
+    height: 31px;   
+}
+section #loginbox #signupbox #box1 #button2 img{
+    position: relative;
+    bottom: 23px;
+}
+section #loginbox #signupbox #box1 #button2:hover{
+    cursor: pointer;
+}
+section #loginbox #signupbox #box1 #button2 span{
+    position: relative;
+    right: 30px;
+    color: rgb(0, 80, 142);
+    font-weight: 600;
+    font-size: 14px;
+}
+section #loginbox #signupbox #box1 p{
+    font-size: 12px;
+}
+section #loginbox #signupbox #box1 a{
+    text-decoration: none;
+    color: #000;
+}
+
+
+
+
+
+section #loginbox #signupbox #box2{
+    display: block;
+    margin: auto;
+    border: 1px rgb(200, 200, 200) solid;
+    width: 320px;
+    height: 65px;
+    margin-top: 15px;
+}
+section #loginbox #signupbox #box2 p{
+    text-align: center;
+    font-size: 14px;
+}
+section #loginbox #signupbox #box2 p span{
+    color:#0095f6;
+    font-weight: 600;
+}
+section #loginbox #signupbox #box2 p a{
+    text-decoration: none;
+}
+section #loginbox #signupbox p{
+    position: relative;
+    top: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+section #loginbox #signupbox #download{
+    margin: auto;
+    margin-top: 30px;
+    width: 320px;
+    height: 40px;
+}
+section #loginbox #signupbox .downloadimg{
+    position: relative;
+    left: 37px;
+}

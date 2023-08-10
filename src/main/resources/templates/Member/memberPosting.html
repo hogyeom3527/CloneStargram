@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Posting</title>
+</head>
+<body>
+<div class="container">
+  <form>
+    <textarea id="postText" rows="30" cols="40"></textarea><br>
+    <button id="postButton">포스팅</button>
+  </form>
+</div>
+
+</body>
+<script>
+  const button = document.getElementById("postButton");
+
+  button.addEventListener('click', () => {
+    const postValue = document.getElementById("postText").value;
+    console.log(postValue);
+    const formData = new FormData();
+    formData.append('postValue', postValue);
+
+    fetch('/Member/writingPostTest', {
+      method: 'POST',
+      body: formData,
+      credentials: 'include' // 쿠키 포함하여 업로드
+    });
+  });
+
+</script>
+</html>
