@@ -1,0 +1,151 @@
+section #sign_up_box{
+    margin: auto;
+    border: 1px rgb(200, 200, 200) solid;
+    width: 320px;
+    height: 570px;
+    margin-top: 15px;
+}
+section #sign_up_box #box1{
+    /* border: red solid 1px; */
+    margin: auto;
+    margin-top: 10px;
+    width: 240px;
+}
+section #sign_up_box #box1 a{
+    text-decoration: none;
+}
+section #sign_up_box #box1 a:focus{
+    outline: none;
+}
+section #sign_up_box #box1 img{
+    display: block;
+    margin: auto;
+    margin-top: 40px;
+    /* border: 1px red solid; */
+}
+section #sign_up_box #box1 #text1{
+    position: relative;
+    bottom: 8px;
+    text-align: center;
+    color: rgb(117, 117, 117);
+    font-weight: 700;
+    font-size: 15px;
+    /* border: 1px red solid; */
+}
+section #sign_up_box #box1 #button1{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    background-color: #0095f6;
+    border-radius: 5px;
+    border-style: none;
+    width: 240px;
+    height: 34px;
+}
+section #sign_up_box #box1 #button1:hover{
+    background-color: #007bf6;
+    cursor: pointer;
+}
+section #sign_up_box #box1 #button1 img{
+    position: relative;
+    bottom: 32px;
+}
+section #sign_up_box #box1 #button1 span{
+    position: relative;
+    right: 35px;
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+}
+section #sign_up_box #box1 #or{ 
+    display: flex;
+    align-items: center;
+    padding: 15px 0 15px 0;
+}
+section #sign_up_box #box1 #or hr{
+    display: inline-block;
+    width: 80px;
+}
+section #sign_up_box #box1 #or span{
+    color: rgb(144, 144, 144);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 0 20px 0 20px;
+}
+section #sign_up_box #box1 #input .write{
+    border-color:  rgb(220, 220, 220);
+    border-width: 0.2px;
+    background-color: rgb(249, 249, 249);
+    border-radius: 2px;
+    width: 230px;
+    height: 32px;
+    margin: 3px 0 3px 0;
+    font-size: 12px;
+    padding-left: 6px;
+}
+section #sign_up_box #box1 #input .write:focus{
+    outline:none;
+    border-color: rgb(171, 171, 171);
+    border-width: 0.2px;
+}
+section #sign_up_box #box1 #input .write:active{
+    border: 1px solid rgb(182, 182, 182);
+}
+section #sign_up_box #box1 #text2{
+    text-align: center;
+    font-size: 12px;
+    color: grey;
+}
+section #sign_up_box #box1 #text2 span{
+    color: rgb(46, 46, 57);
+}
+section #sign_up_box #box1 #button2{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    margin-top: 25px;
+    background-color: #4eb8ff;
+    border-radius: 5px;
+    border-style: none;
+    width: 240px;
+    height: 34px;
+}
+section #sign_up_box #box1 #button2 span{
+    position: relative;
+    left: 98px;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+}
+section #under_box{
+    margin: auto;
+    border: 1px rgb(200, 200, 200) solid;
+    width: 320px;
+    height: 70px;
+    margin-top: 15px;
+}
+section #under_box p{
+    position: relative;
+    top: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+section #under_box p span{
+    color:#0095f6;
+}
+section p{
+    position: relative;
+    top: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+section #download{
+    margin: auto;
+    margin-top: 30px;
+    width: 320px;
+    height: 40px;
+}
+section #download img{
+    position: relative;
+    left: 37px;
+}

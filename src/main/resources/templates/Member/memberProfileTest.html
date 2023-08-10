@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>프로필</title>
+</head>
+<body>
+<div class="container">
+  <img src="" id="userProfile">
+  <form enctype="multipart/form-data" method="POST">
+    <input type="file" id="fileInput">
+  </form>
+
+  <form method="POST" action="/Member/memberLogout"><button>로그아웃</button></form>
+
+</div>
+
+</body>
+<script src="/LoginMemberInfo.js"></script>
+<script>
+  const fileInput = document.getElementById('fileInput');
+
+  const uploadImage = async () => {
+    const file = fileInput.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const response = await fetch('/Member/upload/profileImg', {
+        method: 'POST',
+        body: formData,
+        credentials: 'include' // 쿠키 포함하여 업로드
+      }); // 해당 post 결과로 이미지 src 반환 필요
+
+      if (response.ok) {
+        const imageUrl = await response.text();
+        setProfileImg(imageUrl);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  fileInput.addEventListener('change', () => {
+      uploadImage();
+    });
+
+
+
+
+  // ProfileImg DTO를 GET 요청으로 가져와 프로필 사진 경로를 src 값으로 삽입해주는 function
+  function setProfileImg(src) {
+    const userProfile = document.getElementById("userProfile");
+    fetch("/profile/" + src, {
+      method: 'GET'
+    }).then(response => { return response.blob()}
+    ).then(data =>{
+      const image_src = URL.createObjectURL(data);
+      console.log("바꾼 이미지 src = " + image_src);
+      userProfile.src = image_src;
+
+    });
+  }
+</script>
+</html>

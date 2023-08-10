@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Posting</title>
+</head>
+<body>
+<div class="container">
+  <p>확인할 포스팅의 포스트아이디를 작성 후 서브밋.</p>
+  <input type="text" name="postId" id="inputPostId"><button type="submit" id="button">포스팅</button>
+    <div id="postValue">
+
+    </div>
+
+</div>
+
+</body>
+<script>
+  const button = document.getElementById("button");
+  const postValue = document.getElementById("postValue");
+  const input = document.getElementById("inputPostId");
+
+  button.addEventListener('click', () => {
+
+    fetch(`/Member/getPostValueTEST/${input.value}`, {
+      method: 'GET',
+      credentials: 'include' // 쿠키 포함하여 업로드
+    }).then(response => response.json()
+    ).then(data => {
+      console.log(data);
+      postValue.innerText = data['postValue'];
+    });
+  });
+
+</script>
+</html>

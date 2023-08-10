@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>가입하기 • instargram</title>
+    <link rel="icon" href="/images/Instagram_logo.jpg" />
+    <link rel="stylesheet" type="text/css" href="/css/signup.css" />
+    <link rel="stylesheet" type="text/css" href="/css/footer.css" />
+  </head>
+  <body>
+    <div id="signup">
+      <section>
+        <div id="sign_up_box">
+          <div id="box1">
+            <img
+              src="/images/instagram_logo_illustration.jpg"
+              alt="instgram"
+              width="160"
+            />
+            <p id="text1">친구들의 사진과 동영상을 보려면 가입하세요.</p>
+            <a
+              href="https://www.facebook.com/login.php?skip_api_login=1&api_key=124024574287414&kid_directed_site=0&app_id=124024574287414&signed_next=1&next=https%3A%2F%2Fwww.facebook.com%2Fdialog%2Foauth%3Fclient_id%3D124024574287414%26locale%3Dko_KR%26redirect_uri%3Dhttps%253A%252F%252Fwww.instagram.com%252Faccounts%252Fsignup%252F%26response_type%3Dcode%252Cgranted_scopes%26scope%3Demail%26state%3D%257B%2522fbLoginKey%2522%253A%2522jlyqnb1jkh95b4c56arbke9nyv4lyu616jj0o54c8z8s1cl5343%2522%252C%2522fbLoginReturnURL%2522%253A%2522%252Ffxcal%252Fdisclosure%252F%2522%257D%26ret%3Dlogin%26fbapp_pres%3D0%26logger_id%3Db8d83952-c6c7-49dd-8664-033f3dc5831f%26tp%3Dunspecified&cancel_url=https%3A%2F%2Fwww.instagram.com%2Faccounts%2Fsignup%2F%3Ferror%3Daccess_denied%26error_code%3D200%26error_description%3DPermissions%2Berror%26error_reason%3Duser_denied%26state%3D%257B%2522fbLoginKey%2522%253A%2522jlyqnb1jkh95b4c56arbke9nyv4lyu616jj0o54c8z8s1cl5343%2522%252C%2522fbLoginReturnURL%2522%253A%2522%252Ffxcal%252Fdisclosure%252F%2522%257D%23_%3D_&display=page&locale=ko_KR&pl_dbl=0"
+            >
+              <button id="button1">
+                <img src="/images/facebook_logo.png" alt="facebook" width="16" />
+                <span>Facebook으로 로그인</span>
+              </button>
+            </a>
+            <div id="or">
+              <hr />
+              <span>또는</span>
+              <hr />
+            </div> <!-- or -->
+            <form action="/Member/memberJoin" method="post">
+            <div id="input">
+              <!--pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"은 백엔드 단에서 다루어져야합니다.-->
+              <input
+                class="write"
+                type="text email"
+                placeholder="휴대폰 번호 또는 이메일 주소"
+                required
+                id="id" name="id"
+              />
+              <input class="write" type="text" placeholder="성명" required id="name" name="name" />
+              <input
+                class="write"
+                type="text"
+                placeholder="사용자 이름"
+                required
+                id="userName" name="userName"
+              />
+              <input
+                class="write"
+                type="password"
+                placeholder="비밀번호"
+                required
+                id="password" name="password"
+              />
+
+            </div> <!-- input -->
+            <p id="text2">
+              저희 서비스를 이용하는 사람이 회원님의 연락처 정보를 Instagram에
+              업로드했을 수도 있습니다.
+              <a
+                href="https://www.facebook.com/help/instagram/261704639352628"
+                style="text-decoration: none"
+                target="_blank"
+                ><span>더 알아보기</span></a
+              >
+            </p>
+            <button id="button2" type="submit">
+              <span>가입</span>
+            </button>
+            </form>
+          </div> <!-- box1 -->
+        </div> <!-- sign_up_box -->
+        <div id="under_box">
+          <p>
+            계정이 있으신가요?
+            <a href="#" style="text-decoration: none"><span>로그인</span></a>
+          </p>
+        </div> <!-- under_box -->
+        <p>앱을 다운로드 하세요.</p>
+        <div id="download">
+          <a
+            href="https://play.google.com/store/apps/details?id=com.instagram.android&referrer=ig_mid%3DE2249477-B231-4B49-9554-5DC0FBA27AD0%26utm_campaign%3DsignupPage%26utm_content%3Dlo%26utm_source%3Dinstagramweb%26utm_medium%3Dbadge&pli=1"
+            target="_blank"
+          >
+            <img
+              src="https://static.cdninstagram.com/rsrc.php/v3/ye/r/UtJtFmFLCiD.png"
+              alt="google download"
+              width="130px"
+          /></a>
+          <img
+            src="https://static.cdninstagram.com/rsrc.php/v3/yw/r/LBxTdceDfgS.png"
+            alt="microsoft download"
+            width="110px"
+          />
+        </div> <!-- download -->
+      </section>
+
+      <footer>
+        <div id="under">
+          <p>
+            <a href="#"><span class="text">Meta</span></a>
+            <a href="#"><span class="text">소개</span></a>
+            <a href="#"><span class="text">블로그</span></a>
+            <a href="#"><span class="text">채용 정보</span></a>
+            <a href="#"><span class="text">도움말</span></a>
+            <a href="#"><span class="text">API</span></a>
+            <a href="#"><span class="text">개인정보처리방침</span></a>
+            <a href="#"><span class="text">약관</span></a>
+            <a href="#"><span class="text">인기 계정</span></a>
+            <a href="#"><span class="text">위치</span></a>
+            <a href="#"><span class="text">Instagram Lite</span></a>
+            <a href="#"><span class="text">Threads</span></a>
+            <a href="#"><span class="text">연락처 업로드 & 비사용자</span></a>
+            <a href="#"><span class="text">Meta Verified</span></a>
+          </p>
+          <p>
+            <a href="#"><span class="text">한국어</span></a>
+            <a href="#"><span class="text">© 2023 Instagram from Meta</span></a>
+          </p>
+        </div>
+      </footer>
+    </div> <!-- sign_up -->
+  </body>
+</html>
