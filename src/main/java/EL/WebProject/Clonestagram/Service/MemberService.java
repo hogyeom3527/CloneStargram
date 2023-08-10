@@ -1,10 +1,10 @@
 package EL.WebProject.Clonestagram.Service;
 
 
+import EL.WebProject.Clonestagram.DAO.Repository.MemberRepository;
 import EL.WebProject.Clonestagram.DTO.JoinInfo;
 import EL.WebProject.Clonestagram.DTO.LoginInfo;
 import EL.WebProject.Clonestagram.DTO.Member;
-import EL.WebProject.Clonestagram.DAO.Repository.MemberRepository;
 import EL.WebProject.Clonestagram.StructMapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
