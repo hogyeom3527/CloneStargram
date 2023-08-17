@@ -36,8 +36,6 @@ public class MemberService {
         // 로그인 시에는 LoginInfo 사용.
         // 정규식 돌려서 기입받은 값 확인 이후 그 값에 맞는 데이터로 DB 대질해야 로그인 가능
 
-
-
         if(repository.isMemberEmail(member.getId())) {
             Member joinForm = MemberMapper.INSTANCE.toJoinMemberWithEmailDTO(member);
             repository.joinMember(joinForm);

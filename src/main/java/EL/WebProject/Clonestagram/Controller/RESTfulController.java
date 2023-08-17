@@ -1,9 +1,6 @@
 package EL.WebProject.Clonestagram.Controller;
 
-import EL.WebProject.Clonestagram.DAO.Repository.JdbcRepository;
-import EL.WebProject.Clonestagram.DTO.ProfileImg;
 import EL.WebProject.Clonestagram.DTO.postDTO;
-import EL.WebProject.Clonestagram.Json.profileImgJson;
 import EL.WebProject.Clonestagram.Service.FileService;
 import EL.WebProject.Clonestagram.Service.MemberService;
 import EL.WebProject.Clonestagram.Service.PostService;
@@ -14,13 +11,14 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import java.util.Iterator;
-import java.util.Map;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 
 // RestController는 ajax 통신에서 type: "PUT", "DELETE", "GET", "POST"와 같이 진행
 @RestController
@@ -70,7 +68,7 @@ public class RESTfulController {
 
     // 파일 업로드 및 로드까지 수행하도록 하였음
     @PostMapping("/Member/upload/profileImg")
-    public ResponseEntity<String> uploadProfileImage(/*@PathVariable int userId*/HttpServletRequest request, @RequestParam MultipartFile file){
+    public ResponseEntity<String> uploadProfileImage(/*@PathVariable int userId*/HttpServletRequest request, @RequestParam MultipartFile[] file){
         HttpSession session = request.getSession(false);
 
         HttpHeaders headers = new HttpHeaders();
@@ -94,8 +92,10 @@ public class RESTfulController {
     // 프론트엔드 단에서 받아오는 데이터는 이미지파일의 저장 및 게시글에 저장될 이미지 파일'들'과
     // 게시글의 내용까지만 받아오면 될 듯함.
     // 게시글 '포스팅'
+
+    // 게시글 내용 및 이미지 까지 동시에 받아와야 한다!
     @PostMapping("/Member/writingPostTest")
-    public void setPostTest (HttpServletRequest request, HttpServletResponse response, @RequestParam String postValue) {
+    public void setPostTest (HttpServletRequest request, @RequestParam String postValue) {
         HttpSession session = request.getSession(false);
 
         if(sessionService.isSession(request)) {
@@ -105,15 +105,17 @@ public class RESTfulController {
             // userId는 게시글 테이블의 외래키로 저장되어 사용자 테이블과 연결될 예정.
             // 게시글 테이블은 게시글 번호, 게시물 내용, 좋아요, 댓글리스트 번호, userId를 저장함
             postDTO newPost = new postDTO();
+
             newPost.setPostValue(postValue);
             newPost.setPostUserId(userId);
-            newPost.setPostLike("0");
+            newPost.setPostLike(0);
             newPost.setCommentListId("0");
 
+            Timestamp now = Timestamp.valueOf(LocalDate.now().atTime(LocalTime.now())); // 현재 연, 월, 일, 시, 분, 초 저장
+
+            newPost.setDate(now);
+
             postService.setPostValue(newPost);
-            //postDTO myFirstPost = postService.getPostValueByUserId(userId);
-            //System.out.println(myFirstPost.getPostValue());
-            // return myFirstPost.getPostValue();
         }
         else {
             System.out.println("SomeThing Wrong in setPostTest()");
@@ -121,6 +123,7 @@ public class RESTfulController {
         }
     }
 
+    // 본 함수는 postId를 직접 기입하여 해당 id의 내용을 가져오는 것을 기반으로 함.
     @GetMapping("/Member/getPostValueTEST/{postId}")
     public postDTO getPostTEST(HttpServletRequest request, @PathVariable String postId) {
         if(sessionService.isSession(request)) {
@@ -128,7 +131,39 @@ public class RESTfulController {
             return postService.getPostValueByUserId((String)session.getAttribute("userId"), postId);
         }
         else {
-            System.out.println("SomeThing Wrong in getPostTEST");
+            System.out.println("본인 게시글만 열람 가능.");
+            throw new IllegalStateException();
+        }
+    }
+
+
+    @PostMapping("/Member/postTesting")
+    public void postTest(HttpServletRequest request, @RequestParam("images") MultipartFile[] files, @RequestParam("postValue") String postValue) {
+        HttpSession session = request.getSession(false);
+
+        if(sessionService.isSession(request)) {
+            String userId = (String)session.getAttribute("userId");
+
+            // userId 기준하여 사용자 정보 가져오지 않아도 됨.
+            // userId는 게시글 테이블의 외래키로 저장되어 사용자 테이블과 연결될 예정.
+            // 게시글 테이블은 게시글 번호, 게시물 내용, 좋아요, 댓글리스트 번호, userId를 저장함
+            postDTO newPost = new postDTO();
+            Timestamp now = Timestamp.valueOf(LocalDate.now().atTime(LocalTime.now())); // 현재 연, 월, 일, 시, 분, 초 저장
+
+            newPost.setPostValue(postValue);
+            newPost.setPostUserId(userId);
+            newPost.setPostLike(0);
+            newPost.setCommentListId("0");
+            newPost.setDate(now);
+            postService.setPostValue(newPost); // 게시글 정보를 작성한다.
+
+            // 가져온 파일을 각각 저장하고, 그 이름을 DB에 저장해야한다.
+            // 이때, DB에 파일명을 저장하는 것은 '''원본이 되는 게시글 정보가 작성된 이후'''에 되어야 하므로...
+
+            fileService.setPostImages(newPost.getPostId(), files); // 외부경로에 이미지 저장 및 DB에 이미지 명을 저장한다.
+        }
+        else {
+            System.out.println("SomeThing Wrong in setPostTest()");
             throw new IllegalStateException();
         }
     }

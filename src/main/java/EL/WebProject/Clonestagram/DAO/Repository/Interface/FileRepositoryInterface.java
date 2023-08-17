@@ -1,9 +1,13 @@
 package EL.WebProject.Clonestagram.DAO.Repository.Interface;
 
-import EL.WebProject.Clonestagram.DTO.ProfileImg;
+import java.util.List;
 
 public interface FileRepositoryInterface {
-    String saveFileSrc(String src, String userid);
+    String saveProFileImgSrc(String src, String userid);
 
-    String getFileSrc(String userid);
+    String getProFileImgSrc(String userid);
+
+    String savePostImgSrc(String postId, List<String> imageNames);
+
+    String getPostImgSrc(String src, String userid);
 }

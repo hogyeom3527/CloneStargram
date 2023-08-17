@@ -2,17 +2,19 @@ package EL.WebProject.Clonestagram.Service;
 
 import EL.WebProject.Clonestagram.DAO.Repository.FileRepository;
 import EL.WebProject.Clonestagram.DAO.Repository.MemberRepository;
-import EL.WebProject.Clonestagram.DTO.ProfileImg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 // 파일 저장을 위한 Service 단계 클래스
@@ -43,26 +45,34 @@ public class FileService {
 
     // 이미지 저장 및 이미지 경로를 DB에 저장하기위한 메소드
     // 안되면 String 다시 int로
-    public void setProfileImage(MultipartFile file, String userId) {
+    public void setProfileImage(MultipartFile[] file, String userId) {
         String userImageSrc = memberRepository.whatMemberImage(userId);
         System.out.println("사용자 현재 이미지 src : " + userImageSrc);
         if (userImageSrc == null) { // 저장된 이미지가 없는 경우
             System.out.println("이미지 없어서 새로 저장");
 
-            String storeFilename = binFileSave(file, ""); // 파일 외부경로 위치에 저장
-            fileRepository.saveFileSrc(storeFilename, userId); // 외부경로 위치 및 파일명을 DB에 저장
+            String storeFilename = binFileSave(file, "", true).get(0); // 파일 외부경로 위치에 저장
+            fileRepository.saveProFileImgSrc(storeFilename, userId); // 외부경로 위치 및 파일명을 DB에 저장
         }
         else { // 저장된 이미지가 있는경우, 해당 이미지 명에 그대로 저장
             System.out.println("이미지 존재하므로 그대로 덮어씌움");
 
-            String alreadyStoredFilename = fileRepository.saveFileSrc(userImageSrc, userId);
-            binFileSave(file, alreadyStoredFilename); // 이미 있는 거에 덮어씌우기
+            String alreadyStoredFilename = fileRepository.saveProFileImgSrc(userImageSrc, userId);
+            binFileSave(file, alreadyStoredFilename, true); // 이미 있는 거에 덮어씌우기
         }
 
     }
 
     public String getProfileImage(String userId) {
-        return fileRepository.getFileSrc(userId);
+        return fileRepository.getProFileImgSrc(userId);
+    }
+
+    public void setPostImages(String postId, MultipartFile[] files) {
+
+        List<String> fileNames = binFileSave(files, "", false);
+        // 이미지파일'들'을 저장하고, 저장된 이미지파일들의 이름을 List로 가져옴
+
+        fileRepository.savePostImgSrc(postId, fileNames);
     }
     
     // 확장자명 분리 메소드
@@ -82,46 +92,55 @@ public class FileService {
     }
 
 
-    // 바이너리 파일(이미지, 동영상 등)의 저장을 위한 함수로, 매개변수로 빈 문자열 입력받으면 새로운 파일 이름 제작.
-    private String binFileSave(MultipartFile file, String savedFileName) {
+    // List<String> 형식으로 수정 사유 : List 형식으로 Repository 단에 건네주어서 반복문 돌리면서 저장하기 위함. + 반복문 돌리는데 쓰는 index로 이미지 순서 값 DB에 저장
+    // 바이너리 파일(이미지, 동영상 등)의 저장을 위한 함수로, 매개변수로 빈 문자열 입력받으면 새로운 파일 이름 제작, true면 프로필사진 false면 포스트사진
+    private List<String> binFileSave(MultipartFile[] files, String savedFileName, boolean isProfile) {
         // 파일 저장 위한 함수.
         // DB가 아니라, 프로젝트 내부 경로에 저장 위함이므로 repository와 상관 X?
-
         String storeFilename;
+        List<String> storeFilenameList = new ArrayList<>();
+        String savePath;
 
-        if (savedFileName.equals("")) {
-            storeFilename = createStoreFileName(file.getOriginalFilename());
+        String defaultPath = Paths.get("C:","Clonestagram_FileBase").toString();
+
+        if(isProfile) savePath = Paths.get(defaultPath, "user_Profile").toString();
+        else savePath = Paths.get(defaultPath,"post_Images").toString();
+
+
+        File dir = new File(savePath);
+
+        if(!dir.exists()) {
+            dir.mkdirs();
         }
-        else {
-            storeFilename = savedFileName;
-        }
 
-        String relativePath = PATH + "userProfile/"+ storeFilename;
-        Path absolutePath = Paths.get("").toAbsolutePath();
 
-        System.out.println("absolutePath : " + absolutePath);
-        String savePath =  absolutePath + relativePath; // 파일 저장을 위해 사용할 임시 절대경로
+        for(MultipartFile file : files) {
+            if (savedFileName.equals("")) {
+                storeFilename = createStoreFileName(file.getOriginalFilename());
+            }
+            else {
+                storeFilename = savedFileName;
+            }
 
-        System.out.println("파일 업로드 성공: " + savePath);
-        System.out.println("relativePath: " + PATH + "userProfile/"+ storeFilename);
-        System.out.println("absolutePath: " + absolutePath); // 프로젝트 저장된 clonestagram 가져옴
+            try {
+                if (!file.isEmpty()) {
+                    // 파일 저장
+                    byte[] bytes = file.getBytes();
 
-        try {
-            if (!file.isEmpty()) {
-                // 파일 저장
-                byte[] bytes = file.getBytes();
-                try (FileOutputStream fos = new FileOutputStream(savePath)) {
-                    fos.write(bytes);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    try (FileOutputStream fos = new FileOutputStream(savePath + "/" + storeFilename)) {
+                        fos.write(bytes);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    storeFilenameList.add(storeFilename);
                 }
+            } catch (IOException e) {
+                System.out.println("파일 업로드 실패 : " + e.getMessage());
 
             }
-        } catch (IOException e) {
-            System.out.println("파일 업로드 실패 : " + e.getMessage());
-
         }
 
-        return storeFilename;
+        return storeFilenameList;
     }
 }

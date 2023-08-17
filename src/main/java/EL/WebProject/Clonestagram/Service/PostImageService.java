@@ -22,14 +22,11 @@ public class PostImageService {
     @Transactional
     public boolean postImage(PostImageUploadDTO postImageUploadDTO, String userid){
 
-        // @Value("{file.upload.path}")로 Appliacion.properties에 선언된
-        // /src/main/resources/static/ 경로 String 가져올 수 있음
-        // String 앞에 "classpath:" 붙이는 것으로, 해당 String에서의 경로가
-        // 본 프로젝트의 resources 디렉토리를 루트 디렉토리로 삼게끔 설정 가능
+        // 참고. 포스트(게시글) 계열 코드에서의 프로필 이미지는 일종의 썸네일. 미리보기 이미지를 의미한다.
 
         String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyMMdd"));
-        String postUploadForder = Paths.get("C:", "", "").toString(); //파일경로 아직 미설정
-        String profileUploadForder = Paths.get("", today).toString(); //게시글 이미지 설정하는 곳
+        String postUploadForder = Paths.get("C:", "Clonestagram_FileBase", "").toString(); //파일경로 아직 미설정
+        String profileUploadForder = Paths.get("postImages", today).toString(); //게시글 이미지 설정하는 곳
         String postUploadPath = Paths.get(postUploadForder, profileUploadForder).toString();
         
         // 이미지 저장을 위한 파일 객체 생성

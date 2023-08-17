@@ -9,7 +9,7 @@
   <p>확인할 포스팅의 포스트아이디를 작성 후 서브밋.</p>
   <input type="text" name="postId" id="inputPostId"><button type="submit" id="button">포스팅</button>
     <div id="postValue">
-
+      <div id="images"></div>
     </div>
 
 </div>
@@ -18,19 +18,30 @@
 <script>
   const button = document.getElementById("button");
   const postValue = document.getElementById("postValue");
+  const images = document.getElementById("images");
   const input = document.getElementById("inputPostId");
 
   button.addEventListener('click', () => {
 
-    fetch(`/Member/getPostValueTEST/${input.value}`, {
+    fetch('/Member/getPostValueTEST/${input.value}', {
       method: 'GET',
       credentials: 'include' // 쿠키 포함하여 업로드
     }).then(response => response.json()
     ).then(data => {
       console.log(data);
       postValue.innerText = data['postValue'];
+
+      setPostImages(data);
     });
+
+
   });
 
+  function setPostImages(data) {
+    fetch('/postImages/', {
+
+    });
+    images.innerHTML = "<img src = /postImages/>"
+  }
 </script>
 </html>

@@ -6,7 +6,8 @@
 </head>
 <body>
 <div class="container">
-  <form>
+  <form enctype="multipart/form-data">
+    <input id="postImages" type="file" multiple>이미지 파일 업로드<br>
     <textarea id="postText" rows="30" cols="40"></textarea><br>
     <button id="postButton">포스팅</button>
   </form>
@@ -18,15 +19,25 @@
 
   button.addEventListener('click', () => {
     const postValue = document.getElementById("postText").value;
-    console.log(postValue);
-    const formData = new FormData();
-    formData.append('postValue', postValue);
+    const postImages = document.getElementById("postImages");
+    const files = postImages.files;
 
-    fetch('/Member/writingPostTest', {
+    const formData = new FormData();
+
+    if(files.length > 0) {
+      formData.append('postValue', postValue);
+      for(let i = 0; i< files.length; i++) {
+        formData.append('images', files[i]);
+      }
+    }
+
+    fetch('/Member/postTesting', {
       method: 'POST',
       body: formData,
       credentials: 'include' // 쿠키 포함하여 업로드
     });
+
+
   });
 
 </script>
