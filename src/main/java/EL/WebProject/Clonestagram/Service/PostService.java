@@ -2,8 +2,11 @@ package EL.WebProject.Clonestagram.Service;
 
 import EL.WebProject.Clonestagram.DAO.Repository.PostRepository;
 import EL.WebProject.Clonestagram.DTO.postDTO;
+import EL.WebProject.Clonestagram.DTO.userContentsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PostService {
@@ -24,6 +27,11 @@ public class PostService {
     // 테스트 용도의 함수. 이를 확장시켜 게시글 전체 정보를 가져오게끔 수정 예정.
     public postDTO getPostValueByUserId(String userId, String postId) {
         return postRepository.getPostValueforTEST(userId, postId);
+    }
+
+
+    public List<userContentsDTO> getSemiPostValue(String userId) {
+        return postRepository.getSemiPostList(userId);
     }
 
 }

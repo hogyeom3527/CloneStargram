@@ -1,0 +1,4 @@
+/*홈 선택시 추가 버튼 css */
+aside #menu .menu_tab .img[style *= home]{
+    background-image: url(../img/home2.png);
+}

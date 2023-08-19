@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>나윤(@6_6_sixx) • Instagram 사진 및 동영상</title>
+    <link rel="icon" href="/images/Instagram_logo.jpg" />
+    <link rel="stylesheet" type="text/css" href="/css/profile.css" />
+    <link rel="stylesheet" type="text/css" href="/css/footer.css" />
+    <link rel="stylesheet" type="text/css" href="/css/aside.css" />
+  </head>
+  <body>
+
+    <!-- 만들기 추가창 -->
+    <div class="make_modal hidden">
+        <div class="modal_contents">
+            <p class="text1">새 게시물 만들기</p>
+            <div id="line1"></div>
+            <img src="/images/photo_video.png">
+            <p class="text2">사진과 동영상을 여기에 끌어다 놓으세요</p>
+
+            <!--kh: 버튼 눌리면 input이 구동되어야 한다.-->
+          <!--현재, 버튼 왼쪽 부문이 보이지 않는 input으로 구성되어있는 불완전한 상태.-->
+            <label for="postImageInput"><button id="choose">컴퓨터에서 선택</button></label>
+            <input type="file" id="postImageInput">
+        </div>
+        <button id="close_make">
+            <img src="/images/close.png" width="20px">
+        </button>
+    </div>
+
+    <!-- 새 게시물 추가창 -->
+    <div class="plus_modal hiddenAgain">
+      <div class="plus_contents">
+        <div class="plus_top">
+          <button id="back">
+            <img src="/images/back.png">
+          </button>
+          <p class="text1">새 게시물 만들기</p>
+          <button id="share">공유하기</button>
+        </div>
+        <div id="line2"></div>
+        <div class="inside_contents">
+          <img id = "imgPreView" class="cat" src="/images/cat.jpg">
+          <div class="plus_write">
+            <div class="plus_profile">
+              <div class="plus_photo"></div>
+              <span class="plus_ID">6_6_sixx</span>
+            </div>
+            <div class="post_contents">
+            <textarea id="write_post" maxlength="2199" placeholder="문구 입력..."></textarea>
+            </div>
+            <div class="post_info">
+              <img src="/images/icon.png">
+              <p><span id="char_count">0</span>/2200</p>
+            </div>
+            <div class="plus_place">
+              <input type="text" placeholder="위치 추가">
+              <img src="/images/place.png">
+            </div>
+            <div class="plus_info">
+              <span>접근성</span><span class="blank"></span>
+              <img src="/images/down.png">
+            </div>
+            <div class="plus_info">
+              <span>고급 설정</span>
+              <img src="/images/down.png">
+            </div>
+            </div>
+          </div>
+        </div>
+      <button id="close_again">
+        <img src="/images/close.png" width="20px">
+      </button>
+      </div>
+    </div>
+
+    <!-- 게시물 삭제 안내창 -->
+    <div class="post_alert hiddenAlert">
+      <div class="alert_contents">
+        <span class="text1">게시물을 삭제하시겠어요?</span>
+        <span class="text2">지금 나가면 수정 내용이 저장되지 않습니다.</span>
+        <button id="delete">삭제</button>
+        <button id="cancel">취소</button>
+      </div>
+    </div>
+
+
+
+
+
+    <div id="profile">
+      <aside>
+        <div id="menu">
+          <img
+            id="instagram"
+            src="/images/Instagram_logo_illustration.jpg"
+            alt="imstagram"
+            width="108px"
+          />
+          <!--url() 내부의 url 또한 GET요청의 일환으로 사용 가능하므로, 아래와 같이 작성하여 이미지를 GET요청 기반으로 불러옴-->
+          <div class="menu_tab">
+            <div class="img" style="background-image: url(/images/home.png);"></div>
+            <span>홈</span>
+          </div>
+          <div class="menu_tab">
+            <div class="img" style="background-image: url(/images/search.png);"></div>
+            <span>검색</span>
+          </div>
+          <div class="menu_tab">
+            <div class="img" style="background-image: url(/images/tab.png);"></div>
+            <span>탐색 탭</span>
+          </div>
+          <div class="menu_tab">
+            <div class="img" style="background-image: url(/images/reels.png);"></div>
+            <span>릴스</span>
+          </div>
+          <div class="menu_tab">
+            <div class="img" style="background-image: url(/images/message.png);"></div>
+            <span>메세지</span>
+          </div>
+          <div class="menu_tab">
+            <div class="img" style="background-image: url(/images/alert.png);"></div>
+            <span>알림</span>
+          </div>
+          <div class="menu_tab">
+            <button id="make"></button>
+            <div class="img make_img" style="background-image: url(/images/make.png);"></div>
+            <span>만들기</span>
+          </div>
+          <div class="menu_tab">
+            <div class="img"  style="background-image: url(/images/profile.jpg);" ></div>
+            <span>프로필</span>
+          </div>
+          <div class="more">
+            <img src="/images/more.png" alt="more" />
+            <span>더 보기</span>
+          </div>
+        </div>
+        <!-- menu -->
+      </aside>
+
+      <section><!--userInfo-->
+        <div id="profile_page">
+          <div id="information">
+            <div id="profile_photo">
+              <form enctype="multipart/form-data" method="POST">
+              <input id="fileInput" type="file"> <!--할일: input 버튼 보이지 않게 + 파일명 보이지 않게 + 포토 div와 클릭 영역 크기 동일하게-->
+              </form>
+            </div>
+            <div id="main_box">
+              <div id="box1">
+                <span id="userName">6_6_sixx</span>
+                <button>프로필 편집</button>
+                <button>보관된 스토리 보기</button>
+                <img src="/images/setting.png" alt="setting" />
+              </div>
+              <!-- box1 -->
+              <div id="box2">
+                <span>게시물</span>
+                <span class="number">3</span>
+                <span>팔로워</span>
+                <span class="number">322</span>
+                <span>팔로우</span>
+                <span class="number">299</span>
+              </div>
+              <!-- box2 -->
+              <div id="box3">
+                <span class="text">나윤</span>
+                <span>어쩌구저쩌구</span>
+              </div>
+              <!-- box3 -->
+            </div>
+            <!-- main_box -->
+          </div>
+          <!-- information -->
+          <div id="story">
+            <div class="story_box">
+              <div class="circle"></div>
+              <p>story1</p>
+            </div>
+            <div class="story_box">
+              <div class="circle"></div>
+              <p>story2</p>
+            </div>
+            <div class="story_box">
+              <div class="circle"></div>
+              <p>story3</p>
+            </div>
+            <div class="story_box">
+              <div class="circle"></div>
+              <p>story4</p>
+            </div>
+            <div class="story_box">
+              <div class="new"></div>
+              <p>신규</p>
+            </div>
+          </div>
+          <!-- story -->
+          <div id="contents">
+            <!--참조: iframe을 가져오는 방식을 RequestMapping 사용하여 서버단에서 쏴주어야함. -> 시간관계상 해당 방식 채택 -->
+            <!--또는 iframe을 사용하지 않고 contents를 불러올것.-->
+            <iframe id="userContents" src="/iframe/content_1.html" scrolling="no"></iframe>
+          </div>
+        </div>
+        <!-- profile_page -->
+
+        <footer>
+          <div id="under">
+            <p>
+              <a href="#"><span class="text">Meta</span></a>
+              <a href="#"><span class="text">소개</span></a>
+              <a href="#"><span class="text">블로그</span></a>
+              <a href="#"><span class="text">채용 정보</span></a>
+              <a href="#"><span class="text">도움말</span></a>
+              <a href="#"><span class="text">API</span></a>
+              <a href="#"><span class="text">개인정보처리방침</span></a>
+              <a href="#"><span class="text">약관</span></a>
+              <a href="#"><span class="text">인기 계정</span></a>
+              <a href="#"><span class="text">위치</span></a>
+              <a href="#"><span class="text">Instagram Lite</span></a>
+              <a href="#"><span class="text">Threads</span></a>
+              <a href="#"><span class="text">연락처 업로드 & 비사용자</span></a>
+              <a href="#"><span class="text">Meta Verified</span></a>
+            </p>
+            <p>
+              <a href="#"><span class="text">한국어</span></a>
+              <a href="#"
+                ><span class="text">© 2023 Instagram from Meta</span></a
+              >
+            </p>
+          </div>
+          <!-- under -->
+        </footer>
+      </section>
+    </div>
+    <!-- profile -->
+    <script src="/js/aside.js"></script>
+    <script src="/js/profileImage.js"></script>
+    <script src="/js/postUpload.js"></script>
+    <script src="/js/profilePostListFetch.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,145 @@
+#profile section{
+    float: right;
+    width: 84%;
+}
+section #profile_page{
+    margin: auto;
+    width: 73%;
+}
+section #profile_page #information{
+    display: flex;
+    margin: 33px 0 0 72px;
+    width: 730px;
+    /* border: red 1px solid; */
+}
+
+/*변경 예정 */
+section #profile_page #information #profile_photo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background-image: url(/images/profile.jpg);
+    background-position: center;
+    background-size: cover;
+    /* border: red 1px solid; */
+}
+section #profile_page #information #main_box{
+    margin: 0 0 0 105px;
+    width: 450px;
+}
+section #profile_page #information #main_box #box1{
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 35px;
+}
+section #profile_page #information #main_box #box1 span{
+    font-size: 19px;
+    margin-right: 15px;
+}
+section #profile_page #information #main_box #box1 button{
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    background-color: rgb(235, 235, 235);
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0 15px 0 15px;
+    margin: 0 5px 0 5px;
+}
+section #profile_page #information #main_box #box1 img{
+    width: 25px;
+    margin-left: 12px;
+}
+section #profile_page #information #main_box #box2{
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 35px;
+    margin-top: 13px;
+}
+section #profile_page #information #main_box #box2 .number{
+    font-family:'Lucida Sans Unicode';
+    font-weight: 600;
+    font-size: 14px;
+    margin: 4px 40px 0 5px;
+
+}
+section #profile_page #information #main_box #box3{
+    width: auto;
+    height: 35px;
+    margin-top: 13px;
+}
+section #profile_page #information #main_box #box3 span{
+    display: block;
+}
+section #profile_page #information #main_box #box3 .text{
+    font-weight: 600;
+    font-size: 14px;
+}
+section #profile_page #story{
+    display: flex;
+    margin: 50px 0 0 40px;
+    width: 650px;
+    height: 140px;
+    /* border: red 1px solid; */
+}
+section #profile_page #story .story_box{
+    width: 85px;
+    height: 120px;
+    margin-right: 45px;
+}
+section #profile_page #story .story_box .circle{
+    border: 1px rgb(214, 214, 214) solid;
+    border-radius: 50%;
+    width: 85px;
+    height: 85px;
+}
+section #profile_page #story .story_box p{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    bottom: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+section #profile_page #story .story_box .new{
+    border: 1px rgb(214, 214, 214) solid;
+    border-radius: 50%;
+    width: 85px;
+    height: 85px;
+    background-image: url(../img/new.png);
+    background-position: center;
+    background-size: cover;
+}
+section #profile_page #contents{
+    margin: auto;
+    width: 950px;
+    height: 500px;
+    padding-top: 30px;
+}
+section #profile_page #contents iframe{
+    width: 100%;
+    height: 100%;
+    border: none;
+    overflow: scroll;
+
+}
+
+
+
+/* 프로필 선택시 추가 버튼 css */
+aside #menu .menu_tab .img[style *= profile]{
+    border: 2px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 50%;
+}
+
+#fileInput::file-selector-button {
+    display: none;
+}
+

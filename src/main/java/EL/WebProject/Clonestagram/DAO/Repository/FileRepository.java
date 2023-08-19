@@ -34,24 +34,18 @@ public class FileRepository extends JdbcRepository implements FileRepositoryInte
         try {
             conn = getConnection();
 
+            pstmt = conn.prepareStatement(subSql);
+            pstmt.setString(1, src);
+            pstmt.setString(2, userid);
+            pstmt.executeUpdate(); // 파일 저장까지 수행
+
+
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, userid);
             rs = pstmt.executeQuery();
 
-            // 이미 저장된 값이 있으면 해당 값 가져와서 리턴하고 종료.
-            if(rs.next()) {
-                profileSrc = rs.getString("profileimage");
-                close(conn, pstmt, rs);
-                return profileSrc;
-            }
+            if(rs.next()) profileSrc = rs.getString("profileimage");
 
-            pstmt = conn.prepareStatement(subSql);
-            pstmt.setString(1, src);
-            pstmt.setString(2, userid);
-
-            pstmt.executeUpdate(); // 파일 저장까지 수행
-
-            pstmt = conn.prepareStatement(sql);
         } catch (Exception e) {
             throw new IllegalStateException(e);
         } finally {

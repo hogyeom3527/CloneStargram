@@ -1,6 +1,8 @@
 package EL.WebProject.Clonestagram.Controller;
 
 import EL.WebProject.Clonestagram.DTO.postDTO;
+import EL.WebProject.Clonestagram.DTO.userContentsDTO;
+import EL.WebProject.Clonestagram.DTO.userStatusDTO;
 import EL.WebProject.Clonestagram.Service.FileService;
 import EL.WebProject.Clonestagram.Service.MemberService;
 import EL.WebProject.Clonestagram.Service.PostService;
@@ -18,6 +20,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 // RestController는 ajax 통신에서 type: "PUT", "DELETE", "GET", "POST"와 같이 진행
@@ -35,9 +38,8 @@ public class RESTfulController {
         this.sessionService = sessionService;
         this.postService = postService;
     }
-    
+    /*
     // 로그인한 사용자 userId 가져오기
-    // userId는 세션에 이미 저장되어있으므로, 일반적으로 프론트엔드에 userId를 내려보내줄 일은 아마도? 없음.
     @GetMapping("/Member/getUserId") 
     public String getUserId(HttpServletRequest request) {
         if(sessionService.isSession(request)) {
@@ -51,6 +53,8 @@ public class RESTfulController {
             return null;
         }
     }
+    */
+
 
 
 
@@ -167,6 +171,34 @@ public class RESTfulController {
             throw new IllegalStateException();
         }
     }
+
+
+    // 사용자가 작성한 게시글 개수, 팔로우한 계정 수, 팔로우 받은 계정 수 제공
+    @GetMapping("/Member/Profile/getUserStatus")
+    public ResponseEntity<userStatusDTO> getUserStatus() {
+
+        return null;
+    }
+
+
+    @GetMapping("/Member/Profile/getUserContents")
+    public ResponseEntity<List<userContentsDTO>> getUserContents(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if(sessionService.isSession(request)) {
+            String userId = (String)session.getAttribute("userId");
+            List<userContentsDTO> DTO = postService.getSemiPostValue(userId);
+
+            if(DTO.size() != 0)
+                return ResponseEntity.ok().body(postService.getSemiPostValue(userId));
+            else return ResponseEntity.ok().body(null); // 내용 없으면 null 제공하여 에러 방지
+
+        }
+        else {
+            throw new IllegalStateException("프로필 페이지 로딩 중 오류");
+        }
+    }
+
+
 
 
 

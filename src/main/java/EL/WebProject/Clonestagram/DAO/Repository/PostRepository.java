@@ -1,6 +1,7 @@
 package EL.WebProject.Clonestagram.DAO.Repository;
 
 import EL.WebProject.Clonestagram.DTO.postDTO;
+import EL.WebProject.Clonestagram.DTO.userContentsDTO;
 import EL.WebProject.Clonestagram.Domain.MemberDomain;
 import EL.WebProject.Clonestagram.StructMapper.MemberMapper;
 import org.springframework.stereotype.Repository;
@@ -11,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class PostRepository extends JdbcRepository{
@@ -18,21 +21,6 @@ public class PostRepository extends JdbcRepository{
     public PostRepository(DataSource dataSource) {
         super(dataSource);
     }
-
-    /*
-    * pstmt = conn.prepareStatement(subSql);
-
-
-            // postDTO에 딸려올라온 이미지 이름을 순회하며 각각 하나씩 저장하여야 함.
-            for(int i = 0; i < newPost.getPostImageName().size(); i++) {
-                String imageName = newPost.getPostImageName().get(i);
-                pstmt.setLong(1, newPost.getPostId());
-                pstmt.setInt(2, i + 1); // 게시글 내 등록 순서
-                pstmt.setString(3, imageName);
-
-                pstmt.executeUpdate();
-            }
-    * */
 
     // 게시물 관련 DB에 post(게시글) 내용 삽입
     public void setPost(postDTO newPost) {
@@ -103,6 +91,45 @@ public class PostRepository extends JdbcRepository{
     public void setPostImage() {
 
     }
+
+    // 프로필페이지 작성을 위해 포스트id, 포스트 0번째이미지, 포스트 댓글 개수를 가져옴.
+    public List<userContentsDTO> getSemiPostList(String userId) {
+
+
+        List<userContentsDTO> DTOList = new ArrayList<>();
+
+        String sql = "select postid, imgsrc from forsemipost where userid = ?";
+
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+
+            conn = getConnection();
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, userId);
+
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                userContentsDTO DTO = new userContentsDTO();
+                DTO.setPostId(rs.getString(1));
+                DTO.setImgSrc(rs.getString(2));
+                DTO.setCommentsNum(0); // 댓글 기능 구현 시 db view 및 해당 부문 추가 작성 필요함.
+                DTOList.add(DTO);
+            }
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        } finally {
+            close(conn, pstmt, rs);
+        }
+
+
+        return DTOList;
+    }
+
 
 
 }

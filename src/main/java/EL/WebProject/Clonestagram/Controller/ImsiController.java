@@ -72,7 +72,7 @@ public class ImsiController {
             return "redirect:/"; // 로그인되지 않은채 로그인관련 페이지 진입 못하게끔 리다이렉트
         }
 
-        return "Member/memberProfile";
+        return "FrontEnd/javascript/profile";
     }
 
     @GetMapping("/Member/memberPosting")
@@ -100,17 +100,6 @@ public class ImsiController {
 
         return"Member/memberCheckPosting";
     }
-
-
-
-    // 프로필 페이지 진입 시, DB에 저장되어있는 파일 정보 참조하여 프로필 사진 확인
-//    @GetMapping("/images/{userId}")
-//    public void loadProfileImage(@PathVariable int userId, Model model) {
-//        fileService.getProfileImage(userId);
-//    }
-
-
-    
     
     // 회원가입 정보 전송
     @PostMapping("/Member/memberJoin")

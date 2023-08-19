@@ -52,6 +52,7 @@ public class FileService {
             System.out.println("이미지 없어서 새로 저장");
 
             String storeFilename = binFileSave(file, "", true).get(0); // 파일 외부경로 위치에 저장
+            System.out.println("이미지 저장명 :" + storeFilename);
             fileRepository.saveProFileImgSrc(storeFilename, userId); // 외부경로 위치 및 파일명을 DB에 저장
         }
         else { // 저장된 이미지가 있는경우, 해당 이미지 명에 그대로 저장
@@ -60,7 +61,6 @@ public class FileService {
             String alreadyStoredFilename = fileRepository.saveProFileImgSrc(userImageSrc, userId);
             binFileSave(file, alreadyStoredFilename, true); // 이미 있는 거에 덮어씌우기
         }
-
     }
 
     public String getProfileImage(String userId) {
@@ -106,13 +106,11 @@ public class FileService {
         if(isProfile) savePath = Paths.get(defaultPath, "user_Profile").toString();
         else savePath = Paths.get(defaultPath,"post_Images").toString();
 
-
         File dir = new File(savePath);
 
         if(!dir.exists()) {
             dir.mkdirs();
         }
-
 
         for(MultipartFile file : files) {
             if (savedFileName.equals("")) {
@@ -137,10 +135,8 @@ public class FileService {
                 }
             } catch (IOException e) {
                 System.out.println("파일 업로드 실패 : " + e.getMessage());
-
             }
         }
-
         return storeFilenameList;
     }
 }

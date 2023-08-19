@@ -1,0 +1,422 @@
+body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+#profile aside{
+    float: left;
+    width: 16%;
+}
+aside #menu{
+    position: fixed;
+    width: 16%;
+    height: 100%;
+    border-right: 1px rgb(204, 204, 204) solid;
+}
+aside #menu #instagram{
+    margin: 33px 0 28px 21.5px;
+}
+aside #menu .menu_tab{
+    display: flex;
+    align-items: center;
+    margin-bottom: 8.5px;
+    width: 89%;
+    position: relative;
+    left: 12px;
+    border-radius: 10px;
+}
+aside #menu .menu_tab:hover{
+    background-color: rgb(242, 242, 242);
+    transition: 0.7s;
+    
+}
+aside #menu .menu_tab:hover .img{
+    width: 30px;
+    height: 30px;
+    transition: 0.4s;
+}
+aside #menu .menu_tab:hover #instagram_img{
+    width: 26px;
+    height: 26px;
+}
+aside #menu .menu_tab .img{
+    margin: 10px 15px 10px 10px;
+    width: 28px;
+    height: 28px;
+    background-size: cover;
+    background-position: center;
+}
+aside #menu .more{
+    display: flex;
+    align-items: center;
+    margin-top: 140px;
+    width: 89%;
+    position: relative;
+    left: 12px;
+    border-radius: 10px;
+}
+aside #menu .more img{
+    margin: 10px 15px 10px 12px;
+    width: 26px;
+}
+aside #menu .more:hover{
+    background-color: rgb(242, 242, 242);
+    transition: 0.1s;
+}
+aside #menu .more:hover img{
+    width: 27px;
+    transition: 0.2s;
+}
+aside #menu .menu_tab button{
+    position: fixed;
+    width: 14%;
+    height: 40px;
+    border: none;
+    background-color: rgb(0, 0, 0, 0);
+}
+aside #menu .menu_tab button:hover{
+    cursor: pointer;
+}
+
+
+/* 만들기 추가창 */
+.make_modal{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9998;
+}
+.make_modal .modal_contents{
+    width: 510px;
+    height: 580px;
+    background-color: white;
+    border-radius: 10px;
+
+}
+.make_modal .modal_contents .text1{
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    bottom: 5px;
+}
+.make_modal .modal_contents #line{
+    width: 508px;
+    border: 1px rgb(234, 234, 234) solid;
+    position: relative;
+    bottom: 9px;
+}
+.make_modal .modal_contents img{
+    width: 95px;
+    display: block;
+    margin: auto;
+    margin-top: 165px;
+    
+}
+.make_modal .modal_contents .text2{
+    font-size: 20px;
+    text-align: center;
+    position: relative;
+    bottom: 15px;
+}
+
+/*kh: button -> input으로 변경!*/
+.make_modal .modal_contents button{
+    display: block;
+    margin: auto;
+    border: none;
+    background-color: #0095f6;
+    padding: 7px 16px 7px 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 7px;
+    position: relative;
+    bottom: 10px;
+}
+.make_modal .modal_contents button:hover{
+    background-color:#007bf6;
+    cursor: pointer;
+}
+.make_modal #close_make{
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: rgb(0, 0, 0, 0);
+    border: none;
+}
+.make_modal #close_make:hover{
+    cursor: pointer;
+}
+.hidden{
+    display: none;
+}
+
+#postImageInput {
+    display: none;
+}
+
+
+
+
+
+
+
+/* 만들기 다음 창 */
+.plus_modal{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9997;
+}
+.plus_modal .plus_contents{
+    width: 870px;
+    height: 580px;
+    background-color: white;
+    border-radius: 13px;
+
+}
+.plus_modal .plus_contents .plus_top{
+    display: flex;
+    align-items: center;
+    padding: 0 10px 0 10px;
+}
+.plus_modal .plus_contents .plus_top button{
+    background-color: rgb(0, 0, 0, 0);
+    border: none;
+}
+.plus_modal .plus_contents .plus_top #back:hover{
+    cursor: pointer;
+}
+.plus_modal .plus_contents .plus_top .text1{
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    bottom: 5px;
+    left: 325px;
+}
+.plus_modal .plus_contents .plus_top img{
+    width: 24px;
+    position: relative;
+    bottom: 2px;
+}
+.plus_modal .plus_contents .plus_top #share{
+    font-weight: bold;
+    color: #0095f6;
+    font-size: 14.5px;
+    position: relative;
+    bottom: 5px;
+    left: 625px;
+}
+.plus_modal .plus_contents .plus_top #share:hover{
+    color: #000000;
+    cursor: pointer;
+}
+.plus_modal .plus_contents #line{
+    width: 868px;
+    border: 1px rgb(234, 234, 234) solid;
+    position: relative;
+    bottom: 9px;
+}
+.plus_modal .plus_contents .inside_contents{
+    display: flex;
+}
+.plus_modal .plus_contents .inside_contents .cat{
+    width: 61.5%;
+    position: relative;
+    bottom: 10px;
+    border-radius: 0 0 0 13px;
+}
+.plus_modal .plus_contents .inside_contents .plus_write{
+    width: 38.5%;
+}
+.plus_modal .plus_contents .inside_contents .plus_write .plus_profile{
+    display: flex;
+    padding: 10px 15px 10px 17px;
+    align-items: center;
+    
+}
+.plus_modal .plus_contents .inside_contents .plus_write .plus_profile .plus_photo{
+    background-image: url(../img/profile.jpg);
+    background-position: center;
+    background-size: cover;
+    width: 25px;
+    height: 25px;
+}
+.plus_modal .plus_contents .inside_contents .plus_write .plus_profile .plus_ID{
+    font-size: 13.8px;
+    font-weight: 600;
+    margin-left: 15px;
+}
+.plus_modal .plus_contents .inside_contents .plus_write .post_contents{
+    width: 100%;
+    margin-top: 5px;
+
+
+}
+.plus_modal .plus_contents .inside_contents .plus_write .post_contents textarea{
+    display: flex;
+    margin: auto;
+    float: right;
+    border: none;
+    font-size: 15px;
+    width: 94%;
+    height: 170px;
+    resize: none;
+    font-family: sans-serif;
+}
+.plus_modal .plus_contents .inside_contents .plus_write .post_contents textarea:focus{
+    outline: none;
+}
+.plus_modal .plus_contents .inside_contents .plus_write .post_info{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+}
+.plus_modal .plus_contents .inside_contents .plus_write .post_info img{
+    width: 23px;
+    height: 23px;
+    position: relative;
+    top: 0px;
+    left: 12px;
+}
+.plus_modal .plus_contents .inside_contents .plus_write .post_info p{
+    position: relative;
+    left: 235px;
+    font-size: 12px;
+    color: rgb(197, 197, 197);
+}
+.plus_modal .plus_contents .inside_contents .plus_write .plus_place{
+    border-top: 1px solid rgb(211, 211, 211);
+    border-bottom: 1px solid rgb(211, 211, 211);
+    width: 91%;
+    margin-top: 7px;
+    padding: 12px 15px 12px 15px;
+    display: flex;
+}
+.plus_modal .plus_contents .inside_contents .plus_write .plus_place input{
+    outline: none;
+    border: none;
+    font-size: 16px;
+}
+.plus_modal .plus_contents .inside_contents .plus_write .plus_place img{
+    width: 13.2px;
+    height: 17px;
+    position: relative;
+    top: 0px;
+    left: 85px;
+}
+.plus_modal .plus_contents .inside_contents .plus_write .plus_info{
+    border-bottom: 1px solid rgb(211, 211, 211);
+    width: 303px;
+    padding: 12px 15px 12px 17px;
+    display: flex;
+
+}
+.plus_modal .plus_contents .inside_contents .plus_write .plus_info span{ 
+    font-size: 16px;
+}
+.plus_modal .plus_contents .inside_contents .plus_write .plus_info .blank{
+    width: 22px;
+}
+.plus_modal .plus_contents .inside_contents .plus_write .plus_info img{
+    width: 15px;
+    height: 14px;
+    position: relative;
+    top: 3px;
+    left: 212px;
+}
+.plus_modal #close_again{
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: rgb(0, 0, 0, 0);
+    border: none;
+}
+.plus_modal #close_again:hover{
+    cursor: pointer;
+}
+.hiddenAgain{
+    display: none;
+}
+
+
+
+/* 게시물 삭제 안내창 */
+.post_alert{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+.post_alert .alert_contents{
+    background-color: white;
+    width: 415px;
+    height: 210px;
+    border-radius: 13px;
+}
+.post_alert .alert_contents .text1{
+    display: block;
+    font-size: 21px;
+    text-align: center;
+    margin-top: 27px;
+}
+.post_alert .alert_contents .text2{
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    color: gray;
+    margin-top: 8px;
+    margin-bottom: 27px;
+}
+.post_alert .alert_contents button{
+    display: block;
+    border: none;
+    background-color: white;
+    width: 100%;
+    border-top: 1px solid rgb(211, 211, 211);
+    font-size: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.post_alert .alert_contents button:hover{
+    cursor: pointer;
+}
+.post_alert .alert_contents button:active{
+    background-color: #dedede;
+}
+.post_alert .alert_contents #delete{
+    color: red;
+    font-weight: 700;
+}
+.post_alert .alert_contents #cancel{
+    border-radius: 0 0 13px 13px;
+}
+.hiddenAlert{
+    display: none;
+}
+
+
+
+
+
+
+
+
+/* 만들기 선택시 추가 버튼 css */
+aside #menu .menu_tab .img[style *= "make"]{
+    background-image: url(../img/make2.png);
+}
