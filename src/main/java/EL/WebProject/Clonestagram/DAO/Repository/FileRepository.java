@@ -20,6 +20,8 @@ public class FileRepository extends JdbcRepository implements FileRepositoryInte
 
 
     // 파일이 이미 저장되어있으면 저장 파일명을 리턴, 없으면 DB에 저장
+
+    /** 사용자의 프로필 이미지를 저장하기위한 함수 */
     @Override
     public String saveProFileImgSrc(String src, String userid) {
         String sql = "select profileimage from member where userid = ?";
@@ -55,6 +57,7 @@ public class FileRepository extends JdbcRepository implements FileRepositoryInte
         return profileSrc;
     }
 
+    /** 사용자의 프로필 이미지를 가져오기 위한 함수 */
     @Override
     public String getProFileImgSrc(String userid) {
         String profile = "";
@@ -72,6 +75,9 @@ public class FileRepository extends JdbcRepository implements FileRepositoryInte
             if(rs.next()) {
                 profile = rs.getString("profileimage");
             }
+            else {
+                profile = "";
+            }
 
         } catch (Exception e) {
             throw new IllegalStateException(e);
@@ -81,6 +87,7 @@ public class FileRepository extends JdbcRepository implements FileRepositoryInte
         return profile;
     }
 
+    /** 게시글의 이미지를 서버에 저장하기 위한 함수 */
     @Override
     public String savePostImgSrc(String postId, List<String> imageNames) {
         String sql = "insert into POSTIMAGES values(?,?,?)";

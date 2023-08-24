@@ -1,5 +1,7 @@
 const fileInput = document.getElementById('fileInput');
 
+fileInput.value = null;
+
 loadProfile();
 
 // 프로필 이미지 불러오기 위한 함수
@@ -12,7 +14,6 @@ function loadProfile() {
     }).then(response => {
         return response.text();
     }).then(data => {
-        console.log(data);
         setProfileImg(data);
     });
 }
@@ -38,14 +39,16 @@ fileInput.addEventListener('change', () => {
     }).then(data => {
         console.log("포스트요청 받아옴 : " + data);
 
-        setProfileImg(data);
+        if (data == null) {
+            return 0;
+        }
+        else setProfileImg(data);
     });
 });
 
 // ProfileImg DTO를 GET 요청으로 가져와 프로필 사진 경로를 src 값으로 삽입해주는 function
 function setProfileImg(src) {
     const userProfile = document.getElementById("profile_photo");
-    console.log(src);
     fetch("/profile/" + src, {
         method: 'GET'
     }).then(response => { return response.blob()}

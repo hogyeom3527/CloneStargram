@@ -21,7 +21,7 @@ public class PostImageController {
     }
 
 
-    @PostMapping("")
+    @PostMapping("/qwer")
     public ResponseEntity<String> PostImageUpload(PostImageUploadDTO postImageUploadDTO, HttpServletRequest request){
         HttpSession session = request.getSession(false);
 

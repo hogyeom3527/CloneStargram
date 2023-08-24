@@ -1,6 +1,6 @@
 package EL.WebProject.Clonestagram.Service;
 
-import EL.WebProject.Clonestagram.DAO.Repository.PostImageRepository;
+import EL.WebProject.Clonestagram.DAO.Repository.Interface.PostImageRepository;
 import EL.WebProject.Clonestagram.DTO.PostImage;
 import EL.WebProject.Clonestagram.DTO.PostImageUploadDTO;
 import org.springframework.stereotype.Service;

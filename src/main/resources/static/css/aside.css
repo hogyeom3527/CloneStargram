@@ -152,7 +152,7 @@ aside #menu .menu_tab button:hover{
     cursor: pointer;
 }
 .hidden{
-    display: none;
+    display: none !important;
 }
 
 #postImageInput {

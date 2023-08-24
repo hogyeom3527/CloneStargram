@@ -1,3 +1,6 @@
+/* *{
+    border: 1px red solid;
+} */
 #profile section{
     float: right;
     width: 84%;
@@ -12,8 +15,6 @@ section #profile_page #information{
     width: 730px;
     /* border: red 1px solid; */
 }
-
-/*변경 예정 */
 section #profile_page #information #profile_photo{
     display: flex;
     align-items: center;
@@ -21,10 +22,17 @@ section #profile_page #information #profile_photo{
     width: 140px;
     height: 140px;
     border-radius: 50%;
-    background-image: url(/images/profile.jpg);
+    background-image: url(../img/profile.jpg);
     background-position: center;
     background-size: cover;
-    /* border: red 1px solid; */
+}
+
+section #profile_page #information #profile_photo input{
+    color: rgb(0, 0, 0, 0);
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    opacity: 0;
 }
 section #profile_page #information #main_box{
     margin: 0 0 0 105px;
@@ -116,19 +124,317 @@ section #profile_page #story .story_box .new{
     background-size: cover;
 }
 section #profile_page #contents{
-    margin: auto;
-    width: 950px;
-    height: 500px;
-    padding-top: 30px;
+    width: 938px;
+    margin-top: 30px;
+    border-top: 1px rgb(214, 214, 214) solid;
 }
-section #profile_page #contents iframe{
+section #profile_page #contents #button_menu{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    bottom: 1px;
+}
+section #profile_page #contents #button_menu .menu{
+    border: none;
+    background-color: rgb(0, 0, 0, 0);
+    width: 57px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    margin: 0 30px 0 30px;
+    position: relative;
+
+}
+section #profile_page #contents #button_menu #post{
+    border-top: 1px solid black;
+}
+section #profile_page #contents #button_menu #save{
+    border-top: 1px solid #d9d9d9;
+}
+section #profile_page #contents #button_menu #tag{
+    border-top: 1px solid #d9d9d9;
+}
+section #profile_page #contents #button_menu .menu span{
+    color: #737373;
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    right: 1px;
+}
+section #profile_page #contents #button_menu #post span{
+    color: black;
+}
+section #profile_page #contents #button_menu .menu img{
+    width: 14px;
+    margin-top: 1.5px;
+    position: absolute;
+    left: 0;
+}
+section #profile_page #contents #button_menu .menu:hover{
+    cursor: pointer;
+}
+section #profile_page #contents #photo_box{
+    position: relative;
+    width: 942px;
+    display: inline-block;
+}
+section #profile_page #contents #photo_box .post_photo{
+    position: relative;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    width: 310px;
+    height: 310px;
+    margin-top: 3px;
+}
+section #profile_page #contents #photo_box .post_photo img{
+    width: 310px;
+    height: 310px;
+    position: absolute;
+    z-index: -2;
+}
+section #profile_page #contents #photo_box .post_photo .post_button{
+    width: 310px;
+    height: 310px;
+    background-color: rgb(255, 255, 255, 0);
+    outline: none;
+    border: none;
+}
+section #profile_page #contents #photo_box .post_photo .post_button:active{
+    background-color: rgb(255, 255, 255, 0.5);
+}
+section #profile_page #contents #photo_box .post_photo .post_button:hover{
+    cursor: pointer;
+}
+
+
+section #profile_page #contents .hardCoded_photo{
+    position: relative;
+    width: 942px;
+    display: inline-block;
+}
+section #profile_page #contents .hardCoded_photo .post_photo{
+    position: relative;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    width: 310px;
+    height: 310px;
+    margin-top: 3px;
+}
+section #profile_page #contents .hardCoded_photo .post_photo img{
+    width: 310px;
+    height: 310px;
+    position: absolute;
+    z-index: -2;
+}
+
+
+
+
+
+
+
+/* 게시물 내용창 */
+.check_post{
+    position: fixed;
     width: 100%;
     height: 100%;
-    border: none;
-    overflow: scroll;
+    background-color: rgb(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+.check_post .check_info{
+    background-color: white;
+    width:1200px;
+    height: 700px;
+    border-radius: 4px;
+    display: flex;
+}
+.check_post .check_info .post_photo{
+    width: 700px;
+    height: 700px;
+}
+.check_post .check_info .info_contents .top{
+    border-bottom: 1px solid #ececec;
+    display: block;
+    width: 482px;
+    padding: 17px 0 17px 18px;
+    display: flex;
+    align-items: center;
+    position: relative;
 
 }
-
+.check_post .check_info .info_contents .top img[src *= profile]{
+    width: 27px;
+}
+.check_post .check_info .info_contents .top span{
+    font-size: 13.9px;
+    font-weight: bold;
+    margin-left: 18px;
+    margin-bottom: 2px;
+}
+.check_post .check_info .info_contents .top img[src *= dot]{
+    width: 17px;
+    position: absolute;
+    right: 20px;
+}
+.check_post .check_info .info_contents .middle{
+    padding: 17px 17px 5px 17px;
+    display: flex;
+    height: 460px;
+    border-bottom: #ececec solid 1px;
+}
+.check_post .check_info .info_contents .middle img{
+    width: 27px;
+    height: 27px;
+}
+.check_post .check_info .info_contents .middle .inner_middle{
+    position: relative;
+    bottom: 5px;
+}
+.check_post .check_info .info_contents .middle .inner_middle .ID{
+    font-size: 13.9px;
+    font-weight: bold;
+    margin-left: 18px;
+    margin-bottom: 2px;
+}
+.check_post .check_info .info_contents .middle .inner_middle .date{
+    font-size: 13px;
+    color: #828282;
+    margin-left: 18px;
+}
+.check_post .check_info .info_contents .bottom .like_comment{
+    padding: 13px 17px 13px 17px;
+    position: relative;
+}
+.check_post .check_info .info_contents .bottom .like_comment button{
+    border: none;
+    background-color: rgb(0, 0, 0, 0);
+    background-position: center;
+    background-size: cover;
+}
+.check_post .check_info .info_contents .bottom .like_comment #like{
+    background-image: url(../img/alert.png);
+    width: 29px;
+    height: 27px;
+}
+.check_post .check_info .info_contents .bottom .like_comment #comment{
+    background-image: url(../img/comment.png);
+    width: 23.5px;
+    height: 22.5px;
+    position: absolute;
+    left: 60px;
+    top: 15px;
+}
+.check_post .check_info .info_contents .bottom .like_comment #bookmark{
+    background-image: url(../img/saved2.png);
+    width: 24px;
+    height: 26px;
+    position: absolute;
+    right: 13px
+}
+.check_post .check_info .info_contents .bottom .like_comment #bookmark_return{
+    background-image: url(../img/saved3.png);
+    width: 24px;
+    height: 26px;
+    position: absolute;
+    right: 13px
+}
+.check_post .check_info .info_contents .bottom .like_comment #like:hover{
+    background-image: url(../img/alert2.png);
+    cursor: pointer;
+}
+.check_post .check_info .info_contents .bottom .like_comment #comment:hover{
+    background-image: url(../img/comment2.png);
+    cursor: pointer;
+}
+.check_post .check_info .info_contents .bottom .like_comment #bookmark:hover{
+    background-image: url(../img/saved.png);
+    cursor: pointer;
+}
+.check_post .check_info .info_contents .bottom .like_comment #bookmark_return:hover{
+    cursor: pointer;
+}
+.check_post .check_info .info_contents .bottom .like_people{
+    padding: 0 0 13px 19px;
+    display: flex;
+    align-items:center;
+}
+.check_post .check_info .info_contents .bottom .like_people img{
+    width: 54px;
+}
+.check_post .check_info .info_contents .bottom .like_people .likes{
+    position: relative;
+    left: 4px;
+    bottom: 1.5px;
+}
+.check_post .check_info .info_contents .bottom .like_people span{
+    font-size: 14px;
+}
+.check_post .check_info .info_contents .bottom .like_people .bold{
+    font-weight: 600;
+}
+.check_post .check_info .info_contents .bottom .date{
+    font-size: 11px;
+    color: #828282;
+    position: relative;
+    left: 18px;
+    bottom: 17px;
+}
+.check_post .check_info .info_contents .bottom .comment_input{
+    border-top: #ececec solid 1px;
+    position: relative;
+    bottom: 8px;
+    height: 20px;
+    padding: 15px 0 15px 19px;
+    display: flex;
+    align-items: center;
+}
+.check_post .check_info .info_contents .bottom .comment_input img{
+    width: 24.5px;
+    height: 25px;
+}
+.check_post .check_info .info_contents .bottom .comment_input img:hover{
+    cursor: pointer;
+}
+.check_post .check_info .info_contents .bottom .comment_input input{
+    border: none;
+    outline: none;
+    font-size: 14px;
+    position: relative;
+    left: 12px;
+    top: 3px;
+    width: 380px;
+}
+.check_post .check_info .info_contents .bottom .comment_input #comment_post{
+    position: absolute;
+    right: 12px;
+    color: #0095f6;
+    border: none;
+    background-color: rgb(0, 0, 0, 0);
+    font-size: 14px;
+    font-weight: bold;
+}
+.check_post .check_info .info_contents .bottom .comment_input button:hover{
+    cursor: pointer;
+}
+.check_post #close_button{
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: rgb(0, 0, 0, 0);
+    border: none;
+}
+.check_post #close_button:hover{
+    cursor: pointer;
+}
+.hidden_post{
+    display: none;
+}
 
 
 /* 프로필 선택시 추가 버튼 css */
@@ -139,7 +445,10 @@ aside #menu .menu_tab .img[style *= profile]{
     border-radius: 50%;
 }
 
-#fileInput::file-selector-button {
-    display: none;
+/* iframe 게시물 버튼 */
+section #profile_page #story #post_button{
+    width: 1px;
+    height: 1px;
+    border: none;
+    background-color: rgb(0, 0, 0, 0);
 }
-

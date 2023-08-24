@@ -5,15 +5,19 @@
 
 
 // 게시글 작성 - 이미지 업로드 부문
-const postImageInput = document.getElementById("postImageInput");
+const postImageInput = document.getElementById("choose");
+
+
 
 postImageInput.addEventListener('change', () => {
-    const files = postImageInput.files; // 업로드되어있는 파일의 리스트 가져옴
 
-    const thumbnailImg = files[0];
-    const imgTag = document.getElementById("imgPreView");
-    imgTag.src = URL.createObjectURL(thumbnailImg);
-    closeOpen();
+        const files = postImageInput.files; // 업로드되어있는 파일의 리스트 가져옴
+
+        const thumbnailImg = files[0];
+        const imgTag = document.getElementById("imgPreView");
+        imgTag.src = URL.createObjectURL(thumbnailImg);
+
+        closeOpen();
 });
 
 
@@ -39,17 +43,13 @@ button.addEventListener('click', () => {
             formData.append('images', postImageFiles[i]);
         }
     }
+    else console.log("업로드된 파일 없음.");
 
     fetch('/Member/postTesting', {
         method: 'POST',
         body: formData,
         credentials: 'include' // 쿠키 포함하여 업로드
-    });
-
-    closeMaking(); // 구동안됨... 모달창 닫는 방법 찾기
-    
-    // 모달창 닫고 iframe을 새로고침 하는 것으로 포스팅 된 즉시 게시글 추가되게끔 할 것
-    // 여러 개의 게시글 확인 위해 iframe에 스크롤 기능 추가필요
+    }).then( () => getUserContents() );
 
             
 });

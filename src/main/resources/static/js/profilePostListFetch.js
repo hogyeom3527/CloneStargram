@@ -6,22 +6,23 @@
 
 
 // 저장용도의 객체 형식
-const userContents = {
-    postId : '',
-    thumbnailSrc : '',
-    commentsNumber : 0
-}
+
 
 
 
 const userContentsMap = new Map;
 
-const profileContentsBox = document.getElementById("userContentBox");
+
+
+// let iframe = document.querySelector("#userContents");
 
 getUserContents();
 
 
 function getUserContents() {
+    const imgList= document.querySelector(".hardCoded_photo").querySelectorAll(".post_photo");
+    for (let i = 0; i < imgList.length; i++) imgList[i].classList.add("hidden");
+
     fetch("/Member/Profile/getUserContents",{
             method: 'GET',
             credentials: 'include'
@@ -33,21 +34,57 @@ function getUserContents() {
                 throw new Error('유저 컨텐츠 가져오지 못함');
             }
         }).then(data => {
-            console.log("실제의 경우: " + data);
             // 게시글 관련 로드
-            for(var i = 0; i < data.length; i++) {
+            var i = 0;
+
+            const profileContentsBox = document.getElementById("photo_box");
+
+            profileContentsBox.innerHTML = ""; // 매 로드마다 초기화 진행
+
+            for(i = 0; i < data.length; i++) {
+                const userContents = {
+                    postId : '',
+                    thumbnailSrc : '',
+                    commentsNumber : 0
+                }
+
                 var semi_post = data[i];
-                userContents.postId = semi_post.postId;
                 userContents.thumbnailSrc = semi_post.imgSrc;
                 userContents.commentsNumber = semi_post.commentsNum;
 
-                userContentsMap.set(i, userContents);
+                userContentsMap.set(semi_post.postId, userContents);
 
 
-                // 각 게시글을 페이지에 배치
-                var imgTag = "<img id = " + i + " src = \"/postImages/" + semi_post.imgSrc + "\">";
-                profileContentsBox.innerHTML += imgTag;
+
+                if (i != 0 && i % 3 == 0) {
+                    profileContentsBox.appendChild(document.createElement('br'));
+                }
+
+                var postDiv = document.createElement('div');
+                postDiv.classList.add('post_photo');
+                postDiv.id = semi_post.postId;
+
+                var preViewImg = document.createElement('img');
+                preViewImg.src = "/postImages/" + semi_post.imgSrc;
+
+                var button = document.createElement('button');
+                button.className = 'post_button';
+                button.id = semi_post.postId;
+
+                var span = document.createElement('span');
+                span.className = 'target';
+
+                postDiv.appendChild(preViewImg);
+                postDiv.appendChild(button);
+                postDiv.appendChild(span);
+
+                profileContentsBox.appendChild(postDiv);
+
+
+
             }
-        });
+            console.log("불러온 게시글 내용은 다음과 같음." + userContentsMap);
 
+            openEventMaking()
+    });
 }

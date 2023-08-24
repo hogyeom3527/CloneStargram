@@ -21,8 +21,6 @@ import java.util.Optional;
 
 @Controller
 public class ImsiController {
-    private Member temp;
-
     private final MemberService memberService;
     private final FileService fileService;
 
@@ -72,6 +70,10 @@ public class ImsiController {
             return "redirect:/"; // 로그인되지 않은채 로그인관련 페이지 진입 못하게끔 리다이렉트
         }
 
+        if(sessionService.isSession(request)) {
+            return "redirect:/";
+        }
+
         return "FrontEnd/javascript/profile";
     }
 
@@ -98,7 +100,7 @@ public class ImsiController {
             return "redirect:/";
         }
 
-        return"Member/memberCheckPosting";
+        return "Member/memberCheckPosting";
     }
     
     // 회원가입 정보 전송
@@ -152,8 +154,6 @@ public class ImsiController {
         // 성공시 조건문 무시 후 쿠키 구워옴 + 구우면서 해당 세션 id를 세션서비스에도 저장!
         // 구워온 쿠키를 addCookie로 프론트 엔드로 보내고, 세션 결과와 대질한다.
 
-
-
         // 받아온 로그인 폼으로 아이디 및 비밀번호 대질하여 멤버 객체 생성
         Member loginMember = memberService.getUserInfo(loginInfo).orElse(null);
 
@@ -167,16 +167,17 @@ public class ImsiController {
         // 동시에 쿠키를 리턴받아서 클라이언트의 쿠키로 addCookie 해줌.
         Cookie loginCookie = sessionService.createSession(loginMember.getUserid());
         response.addCookie(loginCookie); // 프론트엔드로 세션 ID 담은 쿠키 '전송'
+        // response를 return하거나 하지 않아도 쿠키가 전송된다??
 
-        // 클라이언트에 비교를 위한 세션을 생성!!! => 쿠키와 세션은 다르다!!!
+        // 서버에 사용자 정보를 끌어와두기 위한 세션을 생성!!! => 쿠키와 세션은 다르다!!!
         HttpSession session = request.getSession(); // 세션 생성
         session.setAttribute("userId", loginMember.getUserid()); // null 부분은 db에 저장되어 있는 유저의 email 가져오기
         // 생성된 세션 내에 유저 기본키를 name tag로 삼는 유저 기본키 값 저장
         
         // 세션 정상적으로 생성됬는지 확인
-        System.out.println("Postlogin(): " + session.getAttribute("userId"));
+        System.out.println("Postlogin() userId : " + session.getAttribute("userId"));
 
-        return "redirect:/Member/sessionLogin";
+        return "redirect:/Member/userInfo"; // 프로필 페이지 이동
     }
 
     //세션 로그아웃
@@ -200,6 +201,25 @@ public class ImsiController {
         return "redirect:/";
     }
 
+    // 프로필 페이지 진입 시, 현재 사용자 정보를 불러옴.
+    @GetMapping("/Member/userInfo")
+    public String profile(HttpServletRequest request, Model model){
+        HttpSession session = request.getSession();
 
+        if(!sessionService.isSession(request)) {
+            System.out.println("로그인 안되있음.");
+            return "redirect:/";
+
+        }
+
+        String userId = (String)session.getAttribute("userId");
+        Optional<Member> findMemberOptional = memberService.findProfile(userId);
+        Member member = findMemberOptional.orElse(null);
+
+        model.addAttribute("user", member);
+
+
+        return "FrontEnd/javascript/profile";
+    }
 
 }

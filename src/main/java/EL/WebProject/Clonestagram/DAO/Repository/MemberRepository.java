@@ -23,6 +23,20 @@ public class MemberRepository extends JdbcRepository implements MemberRepository
 
     private boolean isMatching;
 
+    // 입력된 이메일 정규식 확인
+    @Override
+    public boolean isMemberEmail(String email) {
+        isMatching = email.matches(emailPattern);
+        return isMatching;
+    }
+
+    // 입력된 전화번호 정규식 확인
+    @Override
+    public boolean isMemberPhNum(String phNum) {
+        isMatching = phNum.matches(phNumPattern);
+        return isMatching;
+    }
+
     public MemberRepository(DataSource dataSource) {
         super(dataSource);
     }
@@ -94,27 +108,6 @@ public class MemberRepository extends JdbcRepository implements MemberRepository
         return dtoList;
     }
 
-
-
-    //로그인 관련
-    // 중요! 아래의 내역은 DB없이 임시로 구현하기 위한 내용이다.
-    // 즉, memberRepository에서 행해져야하는 세션 관련 행동은 DB로 실체화 해야하는 것.
-
-//    private static Map<Long, Member> store = new ConcurrentHashMap<>();
-//    private static long idSequence = 0;
-//
-//    public void save(Member member) {
-//        store.put(++idSequence, member);
-//    }
-//
-//    public List<Member> findAll() {
-//        return new ArrayList<>(store.values());
-//    }
-
-//    public void clear() {
-//        store.clear();
-//    }
-
     @Override
     public Optional<Member> findMemberByUserId(String userId) {
         MemberDomain memberDomain;
@@ -181,7 +174,7 @@ public class MemberRepository extends JdbcRepository implements MemberRepository
             rs = pstmt.executeQuery();
 
 
-            if (rs.next() == true) {
+            if (rs.next()) {
                 String dbPw = rs.getString("password");
                 if (dbPw.equals(loginInfo.getPassword())) {
                     memberDomain.setUserid(rs.getString("userid"));
@@ -210,8 +203,8 @@ public class MemberRepository extends JdbcRepository implements MemberRepository
     }
 
 
-    
-    // 사용처 없는 것으로 추정
+    /*
+    * // 사용처 없는 것으로 추정
 //    public int loginMember(LoginInfo loginInfo){
 //
 //        int checkLogin = 0;
@@ -251,21 +244,11 @@ public class MemberRepository extends JdbcRepository implements MemberRepository
 //
 //        return checkLogin;
 //    }
+    * */
 
 
-    // 입력된 이메일 정규식 확인
-    @Override
-    public boolean isMemberEmail(String email) {
-         isMatching = email.matches(emailPattern);
-        return isMatching;
-    }
 
-    // 입력된 전화번호 정규식 확인
-    @Override
-    public boolean isMemberPhNum(String phNum) {
-        isMatching = phNum.matches(phNumPattern);
-        return isMatching;
-    }
+
 
     @Override
     public String whatMemberImage(String userId) {
@@ -302,5 +285,73 @@ public class MemberRepository extends JdbcRepository implements MemberRepository
         return userImageSrc;
     }
 
+
+
+    // 프로필 데이터 가져오기
+    public Optional<Member> findProfile(String userId) {
+        MemberDomain memberDomain;
+        Optional<Member> memberDTO = null;
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            updatePostCnt(userId);
+
+            String sql = "select * from member where userid = ?";
+
+            conn = getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, userId);
+
+            rs = pstmt.executeQuery();
+
+            while(rs.next()) {
+                memberDomain = new MemberDomain();
+
+                memberDomain.setUserid(rs.getString("userid"));
+                memberDomain.setUserName(rs.getString("userName"));
+                memberDomain.setIntroduce(rs.getString("introduce"));
+                memberDomain.setPostCnt(rs.getInt("postCnt"));
+
+                memberDTO = Optional.ofNullable(MemberMapper.INSTANCE.toUserProfileDTO(memberDomain));
+            }
+
+
+
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        } finally {
+            close(conn, pstmt, rs);
+        }
+
+        return memberDTO;
+    }
+
+    // 게시물 개수 가져오기
+    public void updatePostCnt(String userId){
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            String sql = "update member " +
+                    "set postcnt = (select count(postuserid) from post where postuserid = ?) " +
+                    "where userid = ?";
+
+            conn = getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, userId);
+            pstmt.setString(2, userId);
+
+            pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        } finally {
+            close(conn, pstmt, null);
+        }
+    }
 
 }

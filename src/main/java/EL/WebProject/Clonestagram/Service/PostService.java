@@ -24,12 +24,12 @@ public class PostService {
         postRepository.setPost(newPost);
     }
 
-    // 테스트 용도의 함수. 이를 확장시켜 게시글 전체 정보를 가져오게끔 수정 예정.
-    public postDTO getPostValueByUserId(String userId, String postId) {
+    /** postID를 참조하여 가져옴. */
+    public postDTO getPostValueByPostId(String userId, String postId) {
         return postRepository.getPostValueforTEST(userId, postId);
     }
 
-
+    /** 프로필페이지에서 확인할 게시글의 미리보기 이미지 및 게시글id를 가져옴. */
     public List<userContentsDTO> getSemiPostValue(String userId) {
         return postRepository.getSemiPostList(userId);
     }

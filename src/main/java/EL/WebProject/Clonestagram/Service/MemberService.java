@@ -66,26 +66,16 @@ public class MemberService {
         }
 
     }
-    
-    // 사용처 없는 것으로 추정
-    // public int login(LoginInfo loginInfo) { return repository.loginMember(loginInfo); }
 
-    // 본 함수의
     public Optional<Member> findMemberByUserId(String userId) {
         return repository.findMemberByUserId(userId);
     }
 
 
-
-    // 사용처 없는 것으로 추정.
-    //세션 로그인 관련
-//    public Member login(String id, String password){
-//        return repository.findByMemberId(id)
-//                .filter(member -> member.getPassword().equals(password))
-//                .orElse(null);
-//    }
-
-
+    // 프로필 데이터 가져오기
+    public Optional<Member> findProfile(String userId){
+        return repository.findProfile(userId);
+    }
 
 
 

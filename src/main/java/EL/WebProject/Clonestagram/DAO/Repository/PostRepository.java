@@ -56,9 +56,9 @@ public class PostRepository extends JdbcRepository{
 
     }
 
-
+    /** 포스트 내용을 가져옴. */
     public postDTO getPostValueforTEST(String userId, String postId) {
-        String sql = "select postid, postuserid, postvalue from post where postid = ? and postuserid = ?";
+        String sql = "select postid, postuserid, postvalue, posttime from post where postid = ? and postuserid = ?";
         postDTO getPost = new postDTO();
 
         Connection conn = null;
@@ -78,6 +78,7 @@ public class PostRepository extends JdbcRepository{
                 getPost.setPostId(rs.getString("postid"));
                 getPost.setPostUserId(rs.getString("postuserid"));
                 getPost.setPostValue(rs.getString("postvalue"));
+                getPost.setDate(rs.getTimestamp("posttime"));
             }
         } catch (Exception e) {
             throw new IllegalStateException(e);
@@ -92,7 +93,8 @@ public class PostRepository extends JdbcRepository{
 
     }
 
-    // 프로필페이지 작성을 위해 포스트id, 포스트 0번째이미지, 포스트 댓글 개수를 가져옴.
+
+    /** 프로필페이지 작성을 위해 포스트id, 포스트 0번째이미지, 포스트 댓글 개수를 가져옴. */
     public List<userContentsDTO> getSemiPostList(String userId) {
 
 

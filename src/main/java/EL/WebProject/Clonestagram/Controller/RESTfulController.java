@@ -66,7 +66,16 @@ public class RESTfulController {
             return null;
         }
 
-        return fileService.getProfileImage((String)session.getAttribute("userId"));
+        String userProfileImg = fileService.getProfileImage((String)session.getAttribute("userId"));
+
+        if(userProfileImg == null) {
+            return "profile.jpg";
+        }
+        else {
+            return fileService.getProfileImage((String)session.getAttribute("userId"));
+        }
+
+
     }
 
 
@@ -87,10 +96,15 @@ public class RESTfulController {
             System.out.println("파일 업로드 실패.");
             throw new IllegalStateException();
         }
+
+        // 리다이렉트로 위의 GetMapping 불러오는게 나을수도?
         return ResponseEntity.ok()
                 .headers(headers)
                 .body(fileService.getProfileImage((String)session.getAttribute("userId")));
     }
+
+
+
 
     // 포스팅 시 좋아요, 댓글 등의 개수는 0개로 고정되어있음이 당연하다.
     // 프론트엔드 단에서 받아오는 데이터는 이미지파일의 저장 및 게시글에 저장될 이미지 파일'들'과
@@ -132,7 +146,7 @@ public class RESTfulController {
     public postDTO getPostTEST(HttpServletRequest request, @PathVariable String postId) {
         if(sessionService.isSession(request)) {
             HttpSession session = request.getSession(false);
-            return postService.getPostValueByUserId((String)session.getAttribute("userId"), postId);
+            return postService.getPostValueByPostId((String)session.getAttribute("userId"), postId);
         }
         else {
             System.out.println("본인 게시글만 열람 가능.");
@@ -173,14 +187,6 @@ public class RESTfulController {
     }
 
 
-    // 사용자가 작성한 게시글 개수, 팔로우한 계정 수, 팔로우 받은 계정 수 제공
-    @GetMapping("/Member/Profile/getUserStatus")
-    public ResponseEntity<userStatusDTO> getUserStatus() {
-
-        return null;
-    }
-
-
     @GetMapping("/Member/Profile/getUserContents")
     public ResponseEntity<List<userContentsDTO>> getUserContents(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
@@ -190,7 +196,7 @@ public class RESTfulController {
 
             if(DTO.size() != 0)
                 return ResponseEntity.ok().body(postService.getSemiPostValue(userId));
-            else return ResponseEntity.ok().body(null); // 내용 없으면 null 제공하여 에러 방지
+            else return ResponseEntity.ok().body(null); // 내용 없으면 null 제공하여 에러 방지(야매)
 
         }
         else {
@@ -198,6 +204,20 @@ public class RESTfulController {
         }
     }
 
+    /** 게시글 정보 가져오기 */
+    @GetMapping("/Member/getPostInfo/{postId}")
+    public ResponseEntity<postDTO> getPostInfo(HttpServletRequest request, @PathVariable String postId) {
+        if(sessionService.isSession(request)) {
+            HttpSession session = request.getSession(false);
+            postDTO DTO = postService.getPostValueByPostId((String)session.getAttribute("userId"), postId);
+
+            return ResponseEntity.ok().body(DTO);
+        }
+        else {
+            System.out.println("본인 게시글만 열람 가능.");
+            throw new IllegalStateException();
+        }
+    }
 
 
 

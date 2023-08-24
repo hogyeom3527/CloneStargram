@@ -48,7 +48,7 @@ public class FileService {
     public void setProfileImage(MultipartFile[] file, String userId) {
         String userImageSrc = memberRepository.whatMemberImage(userId);
         System.out.println("사용자 현재 이미지 src : " + userImageSrc);
-        if (userImageSrc == null) { // 저장된 이미지가 없는 경우
+        if (userImageSrc == null || userImageSrc.equals("profile.jpg")) { // 저장된 이미지가 없는 경우
             System.out.println("이미지 없어서 새로 저장");
 
             String storeFilename = binFileSave(file, "", true).get(0); // 파일 외부경로 위치에 저장

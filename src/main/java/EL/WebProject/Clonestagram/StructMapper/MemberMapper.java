@@ -6,6 +6,7 @@ import EL.WebProject.Clonestagram.DTO.Member;
 import EL.WebProject.Clonestagram.Domain.MemberDomain;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
@@ -24,6 +25,7 @@ public interface MemberMapper {
     @Mapping(target = "password", source = "password")
     ArrayList<Member> toMemberALDTO(ArrayList<MemberDomain> memberDomain);
 
+    @Named("toMemberDTO") // 모호성 제거를 위한 이름 작성 ambiguous group A
     @Mapping(target = "userid", source = "userid")
     @Mapping(target = "email", source = "email")
     @Mapping(target = "phoneNumber", source = "phoneNumber")

@@ -48,7 +48,8 @@ function closeOpen(){
     closeMaking();
     openAgain();
 }
-chooseBtn.addEventListener("click", closeOpen);
+// 해당 기능은 이미지가 불러와진 이후에 진행되어야 합니다.
+// chooseBtn.addEventListener("click", closeOpen);
 
 
 //다음 창에서 이전으로 가는 함수
@@ -122,3 +123,9 @@ function closeAll(){
     closeAlert();
 }
 deletePost.addEventListener("click",closeAll);
+
+//게시물 업로드 후 창 닫힘
+const shareBtn = document.getElementById("share");
+
+shareBtn.addEventListener("click",closeAll);
+
